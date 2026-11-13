@@ -1,0 +1,29 @@
+
+def coin_change(coins, amount):
+    # Create DP array
+    dp = [float('inf')] * (amount + 1)
+
+    # Base condition
+    dp[0] = 0
+
+    # Calculate minimum coins
+    for i in range(1, amount + 1):
+        for coin in coins:
+            if coin <= i:
+                dp[i] = min(dp[i], dp[i - coin] + 1)
+
+    if dp[amount] == float('inf'):
+        return -1
+
+    return dp[amount]
+
+
+# Main program
+coins = [1, 2, 5]
+amount = 11
+
+result = coin_change(coins, amount)
+
+print("Coins:", coins)
+print("Amount:", amount)
+print("Minimum number of coins:", result)
